@@ -1,2 +1,2 @@
 # JPWP-projekt
-Projekt z przedmiotu JPWP
+Gra interaktywna w języku Java
