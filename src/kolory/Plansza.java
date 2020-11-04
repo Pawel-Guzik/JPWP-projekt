@@ -10,9 +10,11 @@ package kolory;
  * @author paw-g
  */
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.Random;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -37,23 +39,12 @@ public class Plansza extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
 
+        JButton buttons[] = new JButton[16];
+
+
+
         jPanelButtons = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
-        jButton15 = new javax.swing.JButton();
-        jButton16 = new javax.swing.JButton();
+
         jPanelUpSet = new javax.swing.JPanel();
         jPanelWybranyKolor = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
@@ -64,138 +55,33 @@ public class Plansza extends javax.swing.JPanel {
         jPanelButtons.setBackground(new java.awt.Color(0, 0, 0));
         jPanelButtons.setLayout(new java.awt.GridLayout(4, 4));
 
-        jButton1.setText("");
-        jButton1.setBackground(kolory[1]);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanelButtons.add(jButton1);
 
-        jButton2.setText("jButton1");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanelButtons.add(jButton2);
 
-        jButton3.setText("jButton1");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanelButtons.add(jButton3);
 
-        jButton4.setText("jButton1");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jPanelButtons.add(jButton4);
+        for(int i = 0; i<16; i++){
 
-        jButton5.setText("jButton1");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-        jPanelButtons.add(jButton5);
+            buttons[i] = new JButton();
+            buttons[i].setBackground(Color.GRAY);
+            jPanelButtons.add(buttons[i]);
 
-        jButton6.setText("jButton1");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-        jPanelButtons.add(jButton6);
-
-        jButton7.setText("jButton1");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-        jPanelButtons.add(jButton7);
-
-        jButton8.setText("jButton1");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-        jPanelButtons.add(jButton8);
-
-        jButton9.setText("jButton1");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
-        jPanelButtons.add(jButton9);
-
-        jButton10.setText("jButton1");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
-            }
-        });
-        jPanelButtons.add(jButton10);
-
-        jButton11.setText("jButton1");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
-            }
-        });
-        jPanelButtons.add(jButton11);
-
-        jButton12.setText("jButton1");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
-            }
-        });
-        jPanelButtons.add(jButton12);
-
-        jButton13.setText("jButton1");
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
-            }
-        });
-        jPanelButtons.add(jButton13);
-
-        jButton14.setText("jButton1");
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
-            }
-        });
-        jPanelButtons.add(jButton14);
-
-        jButton15.setText("jButton1");
-        jButton15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton15ActionPerformed(evt);
-            }
-        });
-        jPanelButtons.add(jButton15);
-
-        jButton16.setText("jButton1");
-        jButton16.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton16ActionPerformed(evt);
-            }
-        });
-        jPanelButtons.add(jButton16);
+        }
 
         jPanelUpSet.setBackground(new java.awt.Color(102, 255, 102));
 
-        jPanelWybranyKolor.setBackground(new java.awt.Color(255, 51, 51));
+
+
+        int kutas = new Random().nextInt(6);        // losuje jebany kolor
+        System.out.println("wylosowany = " + kutas);
+
+
+
+
+
+        jPanelWybranyKolor.setBackground(kolory[kutas]);
+
+
+
+
 
         javax.swing.GroupLayout jPanelWybranyKolorLayout = new javax.swing.GroupLayout(jPanelWybranyKolor);
         jPanelWybranyKolor.setLayout(jPanelWybranyKolorLayout);
@@ -216,7 +102,7 @@ public class Plansza extends javax.swing.JPanel {
 
 
         jTextField1.setText("CZAS");
-
+        liczczas();
 
 
 
@@ -302,13 +188,11 @@ public class Plansza extends javax.swing.JPanel {
         TimerTask task = new TimerTask() {
             public void run(){
                 sekundy--;
-                System.out.println(sekundy);
                 jTextField1.setText(String.valueOf(sekundy));
             }
         };
 
         timer.scheduleAtFixedRate(task,1000,1000);
-        //jTextField1.setText(String.valueOf(sekundy));
         return sekundy;
     }
 
@@ -318,69 +202,6 @@ public class Plansza extends javax.swing.JPanel {
 
 
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
 
 
     // Variables declaration - do not modify
