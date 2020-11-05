@@ -16,6 +16,7 @@ import java.util.Collections;
 
 
 
+
 public class Plansza extends javax.swing.JPanel {
 
     /**
@@ -30,6 +31,8 @@ public class Plansza extends javax.swing.JPanel {
     int sekundy = 10;
     public static boolean koniec_rundy = false;
     int wybrany_kolor =0;
+    int buf = 0;
+
     JButton buttons[] = new JButton[16];
 
     public Plansza() {
@@ -94,16 +97,6 @@ public class Plansza extends javax.swing.JPanel {
         }
 
         jPanelUpSet.setBackground(Color.BLACK);
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -224,11 +217,7 @@ public class Plansza extends javax.swing.JPanel {
                         wybrano = true;
                         wylosowany_przycisk = losowanie_przycisku();
                         buttons[wylosowany_przycisk].setBackground(kolory[wybrany_kolor]);
-
-
-
-
-
+                        inne_przyciski();
 
 
                     }
@@ -250,9 +239,10 @@ public class Plansza extends javax.swing.JPanel {
 
     public void actionPerformed(java.awt.event.ActionEvent e) {
         Object source = e.getSource();
-        if(source == buttons[wylosowany_przycisk] && sekundy > 0){
+        if(source == buttons[wylosowany_przycisk] && sekundy> 0){
             liczba_punktow++;
             buttons[wylosowany_przycisk].setBackground(Color.darkGray);
+            buttons[buf].setBackground(Color.darkGray);
             jTextField2.setText(String.valueOf(liczba_punktow));
             wybrano = false;
 
@@ -267,6 +257,30 @@ public class Plansza extends javax.swing.JPanel {
         los = new Random().nextInt(16);
         System.out.println("wylosowany = " + los);
         return los;
+    }
+
+    public void inne_przyciski() {
+       ArrayList<Color> kolory_dwa = new ArrayList<Color>();
+        System.out.println(wybrany_kolor);
+       for(int i = 0; i<7; i++){
+           if(kolory[i] != kolory[wybrany_kolor]){
+               kolory_dwa.add(kolory[i]);
+
+           }
+       }
+
+       int ilosc =  0;
+       ilosc =  new Random().nextInt(3);
+       ilosc++;
+
+       buf = wylosowany_przycisk;
+       while(buf == wylosowany_przycisk){
+
+           buf = new Random().nextInt(16);
+
+       }
+
+        buttons[buf].setBackground(kolory_dwa.get(2));
 
     }
 
