@@ -1,6 +1,9 @@
 
 package kolory;
 
+import java.awt.*;
+
+
 public class StartPanel extends javax.swing.JPanel {
 
 
@@ -8,25 +11,33 @@ public class StartPanel extends javax.swing.JPanel {
         initComponents();
     }
 
-
+    int sekundy = 5;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
+
 
         jTextField1 = new javax.swing.JTextField();
         jButtonStart = new javax.swing.JButton();
         jButtonStart.addActionListener(this::actionPerformed);
 
         setBackground(new java.awt.Color(0, 0, 0));
-
-        jTextField1.setBackground(new java.awt.Color(0, 0, 0));
+        jTextField1.setBackground(Color.black);
         jTextField1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField1.setText("COLOR GAME");
+        jTextField1.setForeground(Color.darkGray);
+
+
+
 
         jButtonStart.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jButtonStart.setText("START GAME");
+        jButtonStart.setBackground(Color.darkGray);
+        jButtonStart.setForeground(Color.BLACK);
+        jButtonStart.isRolloverEnabled();
+
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -65,6 +76,9 @@ public class StartPanel extends javax.swing.JPanel {
             Main.game_window.add(gra);
         }
     }
+
+
+
 
     // Variables declaration - do not modify
     private javax.swing.JButton jButtonStart;
