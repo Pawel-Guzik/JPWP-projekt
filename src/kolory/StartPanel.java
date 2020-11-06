@@ -19,6 +19,7 @@ public class StartPanel extends javax.swing.JPanel {
 
 
         jTextField1 = new javax.swing.JTextField();
+        jTextField1.setEditable(false);
         jButtonStart = new javax.swing.JButton();
         jButtonStart.addActionListener(this::actionPerformed);
 
