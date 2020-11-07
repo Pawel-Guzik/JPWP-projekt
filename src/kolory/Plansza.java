@@ -14,16 +14,23 @@ public class Plansza extends javax.swing.JPanel {
     Color dark_magneta =  new java.awt.Color(139, 0, 139);
     Color indigo =  new java.awt.Color(75, 0, 130);
     Color sky_blue =  new java.awt.Color(135, 206, 235);
+    Color teal =  new java.awt.Color(0, 128, 128);
     Color lime = new java.awt.Color(0, 255, 0);
     Color green = new java.awt.Color(0, 128, 0);
+    Color dark_olive_green = new java.awt.Color(85, 107, 47);
     Color maroon = new java.awt.Color(128, 0, 0);
     Color sandy_brown = new java.awt.Color(244, 164, 96);
     Color wheat = new java.awt.Color(245, 222, 179);
-    Color sienna = new java.awt.Color(	160, 82, 45);
+    Color sienna = new java.awt.Color(160, 82, 45);
+    Color gold = new java.awt.Color(255, 215, 0);
+    Color orange_red = new java.awt.Color(255, 69, 0);
 
 
-    private Color[] kolory = {dark_magneta, Color.MAGENTA, indigo, Color.BLUE, sky_blue, lime, green, Color.RED, maroon, sandy_brown, wheat, sienna};
-    int liczba_kolorow = 12;
+
+
+
+    private Color[] kolory = {dark_magneta, Color.MAGENTA, indigo, Color.BLUE, sky_blue, lime, green, Color.RED, maroon, sandy_brown, wheat, sienna, gold, dark_olive_green, teal, orange_red};
+    int liczba_kolorow = 16;
     int liczba_punktow = 0;
     int wylosowany_przycisk = 2;
     boolean wybrano = false;
@@ -31,6 +38,7 @@ public class Plansza extends javax.swing.JPanel {
     public static boolean koniec_rundy = false;
     int wybrany_kolor =0;
     int buf = 0;
+    int poziom_trudnosci = 0;
 
     JButton buttons[] = new JButton[16];
 
@@ -188,7 +196,8 @@ public class Plansza extends javax.swing.JPanel {
                         wybrano = true;
                         wylosowany_przycisk = losowanie_przycisku();
                         buttons[wylosowany_przycisk].setBackground(kolory[wybrany_kolor]);
-                        przeszkody();
+                        poziom_pierwszy();
+                        //poziom_drugi();
                     }
 
                 } else {
@@ -197,7 +206,7 @@ public class Plansza extends javax.swing.JPanel {
                 }
             }
         };
-        timer.scheduleAtFixedRate(task,1000,1000);
+        timer.scheduleAtFixedRate(task,0,1000);
         return sekundy;
     }
 
@@ -217,7 +226,8 @@ public class Plansza extends javax.swing.JPanel {
 
             jPanelWybranyKolor.setBackground(kolory[wybrany_kolor]);
             buttons[wylosowany_przycisk].setBackground(kolory[wybrany_kolor]);
-            przeszkody();
+            poziom_pierwszy();
+            //poziom_drugi();
         }
     }
 
@@ -228,7 +238,11 @@ public class Plansza extends javax.swing.JPanel {
         return los;
     }
 
-    public void przeszkody() {
+
+
+
+
+    public void poziom_pierwszy() {
 
         List<Color> uzyte_kolory = new ArrayList<>();               // kolory ktorych mozna uzyc na inne przyciski
 
@@ -268,6 +282,29 @@ public class Plansza extends javax.swing.JPanel {
         }
 
     }
+
+
+
+    public void poziom_drugi(){
+
+        List<Color> uzyte_kolory = new ArrayList<>();               // kolory ktorych mozna uzyc na inne przyciski
+
+        for(int i = 0; i<liczba_kolorow; i++){
+            uzyte_kolory.add(kolory[i]);
+        }
+        uzyte_kolory.remove(wybrany_kolor);
+        Collections.shuffle(uzyte_kolory);
+        int ktory_kolor = 0;
+
+        for(int i=0; i<15; i++){
+            if(i == wylosowany_przycisk){
+                continue;
+            }
+            buttons[i].setBackground(uzyte_kolory.get(i));
+        }
+    }
+
+
     private javax.swing.JPanel jPanelButtons;
     private javax.swing.JPanel jPanelUpSet;
     private javax.swing.JPanel jPanelWybranyKolor;

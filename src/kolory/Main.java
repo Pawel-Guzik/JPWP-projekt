@@ -17,8 +17,6 @@ public class Main
         game_window.setVisible(true);
 
 
-
-
     }
 
 
