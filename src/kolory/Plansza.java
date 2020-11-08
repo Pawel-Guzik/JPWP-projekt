@@ -34,17 +34,20 @@ public class Plansza extends javax.swing.JPanel {
     int liczba_punktow = 0;
     int wylosowany_przycisk = 2;
     boolean wybrano = false;
-    int sekundy = 10;
+    float sekundy = 10;
     public static boolean koniec_rundy = false;
     int wybrany_kolor =0;
     int buf = 0;
-    int poziom_trudnosci = 0;
+    int poziom = 0;
+    int licznik_czasu = 0;
 
     JButton buttons[] = new JButton[16];
 
     public Plansza() {
         initComponents();
+
         gra();
+
 
 
     }
@@ -177,27 +180,39 @@ public class Plansza extends javax.swing.JPanel {
     }// </editor-fold>
 
 
-    public int gra(){
+    public float gra(){
 
         jTextField1.setText(String.valueOf(sekundy));
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
 
-
             public void run() {
+
                 if (sekundy > 0) {
-
-                    sekundy--;
+                    licznik_czasu++;
+                    // formatowanie  czasu
+                    sekundy = (float)(sekundy - 0.1);
+                    sekundy *= 10;
+                    sekundy = Math.round(sekundy);
+                    sekundy /= 10;
+                    // koniec formatowania czasu
                     jTextField1.setText(String.valueOf(sekundy));
-                    wybrany_kolor = new Random().nextInt(liczba_kolorow);
-                    if(wybrano == false) {
 
-                        jPanelWybranyKolor.setBackground(kolory[wybrany_kolor]);
+                    if(licznik_czasu == 10){
+                        licznik_czasu = 0;
+                        for(int i = 0; i<16; i++){
+                            buttons[i].setBackground(Color.darkGray);
+                        }
+                        poziom_pierwszy();
+                        //biezacy_poziom();
+                    }
+
+                    if(wybrano == false) {
                         wybrano = true;
-                        wylosowany_przycisk = losowanie_przycisku();
-                        buttons[wylosowany_przycisk].setBackground(kolory[wybrany_kolor]);
+
                         poziom_pierwszy();
                         //poziom_drugi();
+                        //biezacy_poziom();
                     }
 
                 } else {
@@ -206,7 +221,7 @@ public class Plansza extends javax.swing.JPanel {
                 }
             }
         };
-        timer.scheduleAtFixedRate(task,0,1000);
+        timer.scheduleAtFixedRate(task,0,100);
         return sekundy;
     }
 
@@ -214,18 +229,13 @@ public class Plansza extends javax.swing.JPanel {
     public void actionPerformed(java.awt.event.ActionEvent e) {
         Object source = e.getSource();
         if(source == buttons[wylosowany_przycisk] && sekundy> 0){
+            licznik_czasu = 0;
             for(int i = 0; i<16; i++){
                 buttons[i].setBackground(Color.darkGray);
             }
             liczba_punktow++;
             jTextField2.setText(String.valueOf(liczba_punktow));
-
-            wylosowany_przycisk = losowanie_przycisku();
-
-            wybrany_kolor = new Random().nextInt(liczba_kolorow);
-
-            jPanelWybranyKolor.setBackground(kolory[wybrany_kolor]);
-            buttons[wylosowany_przycisk].setBackground(kolory[wybrany_kolor]);
+            //biezacy_poziom();
             poziom_pierwszy();
             //poziom_drugi();
         }
@@ -243,6 +253,10 @@ public class Plansza extends javax.swing.JPanel {
 
 
     public void poziom_pierwszy() {
+        wybrany_kolor = new Random().nextInt(liczba_kolorow);
+        jPanelWybranyKolor.setBackground(kolory[wybrany_kolor]);
+        wylosowany_przycisk = losowanie_przycisku();
+        buttons[wylosowany_przycisk].setBackground(kolory[wybrany_kolor]);
 
         List<Color> uzyte_kolory = new ArrayList<>();               // kolory ktorych mozna uzyc na inne przyciski
 
@@ -301,6 +315,14 @@ public class Plansza extends javax.swing.JPanel {
                 continue;
             }
             buttons[i].setBackground(uzyte_kolory.get(i));
+        }
+    }
+
+    public void biezacy_poziom(){
+        if(poziom == 0){
+            poziom_pierwszy();
+        }else if(poziom == 1){
+            poziom_drugi();
         }
     }
 
