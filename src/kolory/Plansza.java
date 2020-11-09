@@ -6,6 +6,7 @@ import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 
 
 public class Plansza extends javax.swing.JPanel {
@@ -31,22 +32,27 @@ public class Plansza extends javax.swing.JPanel {
 
     private Color[] kolory = {dark_magneta, Color.MAGENTA, indigo, Color.BLUE, sky_blue, lime, green, Color.RED, maroon, sandy_brown, wheat, sienna, gold, dark_olive_green, teal, orange_red};
     int liczba_kolorow = 16;
-    int liczba_punktow = 0;
+    static int liczba_punktow = 0;
     int wylosowany_przycisk = 2;
     boolean wybrano = false;
-    float sekundy = 10;
+    static public float sekundy = 10;
     public static boolean koniec_rundy = false;
     int wybrany_kolor =0;
     int buf = 0;
-    int poziom = 0;
+    static int poziom = 0;
     int licznik_czasu = 0;
+    int po_jakim_czasie_zmiana = 10;
+    static boolean koniec_gry = false;
 
     JButton buttons[] = new JButton[16];
 
     public Plansza() {
         initComponents();
 
+
         gra();
+
+
 
 
 
@@ -181,6 +187,8 @@ public class Plansza extends javax.swing.JPanel {
 
 
     public float gra(){
+        Main.koniec = new Koniec();
+        Main.koniec.setVisible(false);
 
         jTextField1.setText(String.valueOf(sekundy));
         Timer timer = new Timer();
@@ -188,7 +196,9 @@ public class Plansza extends javax.swing.JPanel {
 
             public void run() {
 
+
                 if (sekundy > 0) {
+                    jTextField2.setText(String.valueOf(liczba_punktow));
                     licznik_czasu++;
                     // formatowanie  czasu
                     sekundy = (float)(sekundy - 0.1);
@@ -198,24 +208,55 @@ public class Plansza extends javax.swing.JPanel {
                     // koniec formatowania czasu
                     jTextField1.setText(String.valueOf(sekundy));
 
-                    if(licznik_czasu == 10){
+                    if(licznik_czasu == po_jakim_czasie_zmiana){
                         licznik_czasu = 0;
                         for(int i = 0; i<16; i++){
                             buttons[i].setBackground(Color.darkGray);
                         }
-                        poziom_pierwszy();
-                        //biezacy_poziom();
+                        //poziom_pierwszy();
+                        biezacy_poziom();
                     }
 
                     if(wybrano == false) {
                         wybrano = true;
 
-                        poziom_pierwszy();
-                        //poziom_drugi();
-                        //biezacy_poziom();
+                        biezacy_poziom();
                     }
+                        if(poziom == 2) {
+                            koniec_gry = true;
+                        }
 
                 } else {
+
+
+                    if(liczba_punktow >= 7 && poziom ==1){
+                        sekundy = 15;
+                        poziom = 2;
+                        po_jakim_czasie_zmiana = 16;
+                        biezacy_poziom();
+                    }
+                    if(liczba_punktow >=7  && poziom ==0){
+
+                        sekundy = 3;
+                        poziom = 1;
+                        po_jakim_czasie_zmiana = 16;
+                        biezacy_poziom();
+
+                    }
+                    if((poziom == 2 && koniec_gry == true) || (poziom==0 && liczba_punktow<7)) {
+                        poziom = 0;
+
+                        Main.gra.setVisible(false);
+                        Main.koniec.setVisible(true);
+                        Main.game_window.add(Main.koniec);
+                        Main.koniec.revalidate();
+                        Main.koniec.repaint();
+                        Main.koniec.jTextField1.setText("Twoje punkty: " + String.valueOf(liczba_punktow));
+                    }
+
+
+
+
                     jTextField1.setText("0");
                     koniec_rundy = true;
                 }
@@ -223,6 +264,8 @@ public class Plansza extends javax.swing.JPanel {
         };
         timer.scheduleAtFixedRate(task,0,100);
         return sekundy;
+
+
     }
 
 
@@ -235,8 +278,8 @@ public class Plansza extends javax.swing.JPanel {
             }
             liczba_punktow++;
             jTextField2.setText(String.valueOf(liczba_punktow));
-            //biezacy_poziom();
-            poziom_pierwszy();
+            biezacy_poziom();
+            //poziom_pierwszy();
             //poziom_drugi();
         }
     }
@@ -300,21 +343,33 @@ public class Plansza extends javax.swing.JPanel {
 
 
     public void poziom_drugi(){
+        wybrany_kolor = new Random().nextInt(liczba_kolorow);
+        jPanelWybranyKolor.setBackground(kolory[wybrany_kolor]);
+        wylosowany_przycisk = losowanie_przycisku();
+        //buttons[wylosowany_przycisk].setBackground(kolory[wybrany_kolor]);
 
         List<Color> uzyte_kolory = new ArrayList<>();               // kolory ktorych mozna uzyc na inne przyciski
 
         for(int i = 0; i<liczba_kolorow; i++){
             uzyte_kolory.add(kolory[i]);
         }
-        uzyte_kolory.remove(wybrany_kolor);
-        Collections.shuffle(uzyte_kolory);
-        int ktory_kolor = 0;
 
-        for(int i=0; i<15; i++){
+
+        Collections.shuffle(uzyte_kolory);
+
+        int j = 0;
+        for(int i=0; i<16; i++){
+
             if(i == wylosowany_przycisk){
+                buttons[i].setBackground(kolory[wybrany_kolor]);
                 continue;
             }
-            buttons[i].setBackground(uzyte_kolory.get(i));
+            if(uzyte_kolory.get(j) ==kolory[wybrany_kolor]){
+                j++;
+                //buttons[i].setBackground(uzyte_kolory.get(j));
+            }
+            buttons[i].setBackground(uzyte_kolory.get(j));
+            j++;
         }
     }
 
@@ -322,8 +377,19 @@ public class Plansza extends javax.swing.JPanel {
         if(poziom == 0){
             poziom_pierwszy();
         }else if(poziom == 1){
+            przerwa();
+        }else if(poziom == 2){
             poziom_drugi();
         }
+    }
+
+    public void przerwa(){
+        for(int i = 0; i<16; i++){
+            buttons[i].setBackground(Color.darkGray);
+        }
+
+        jPanelWybranyKolor.setBackground(Color.BLACK);
+
     }
 
 

@@ -20,7 +20,8 @@ public class Window extends JFrame //implements ActionListener
     {
         setSize(1280,1024);
         setTitle("GRA W KOLORY");
-        setLayout(new BorderLayout());
+        //setLayout(new BorderLayout());
+        //setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //setResizable(false);
         setLocationRelativeTo(null);

@@ -7,6 +7,7 @@ import java.awt.*;
 public class StartPanel extends javax.swing.JPanel {
 
 
+
     public StartPanel() {
         initComponents();
     }
@@ -27,8 +28,8 @@ public class StartPanel extends javax.swing.JPanel {
         jTextField1.setBackground(Color.black);
         jTextField1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setText("COLOR GAME");
-        jTextField1.setForeground(Color.darkGray);
+        jTextField1.setText("GRA W KOLORY");
+        jTextField1.setForeground(new java.awt.Color(192, 192, 192));
 
 
 
@@ -73,8 +74,8 @@ public class StartPanel extends javax.swing.JPanel {
         System.out.println(source);
         if(source == jButtonStart){
             this.setVisible(false);
-            Plansza gra = new Plansza();
-            Main.game_window.add(gra);
+            Main.gra = new Plansza();
+            Main.game_window.add(Main.gra);
         }
     }
 
