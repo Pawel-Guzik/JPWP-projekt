@@ -3,38 +3,32 @@ package kolory;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
-public class Window extends JFrame implements ActionListener
+public class Window extends JFrame //implements ActionListener
 {
+    private JButton start;
+    private JPanel p;
+//    private JPanel g;
+
+
+
+
+
     public Window()
     {
         setSize(1280,1024);
         setTitle("GRA W KOLORY");
-        setLayout(new BorderLayout());
+        //setLayout(new BorderLayout());
+        //setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-
-    public void menu()              // funkcja dodaje przycisk menu
-    {
-
-        JButton start = new JButton("PLAY");
-        start.setBackground(Color.CYAN);
-
-        start.setPreferredSize(new Dimension(200,100));
-        JPanel p = new JPanel();
-
-        p.add(start);
-        p.setBackground(Color.BLACK);
-
-        this.add(p);
+        //setResizable(false);
+        setLocationRelativeTo(null);
 
     }
 
 
-
-    @Override
-    public void actionPerformed(ActionEvent arg0)
 
 
 
